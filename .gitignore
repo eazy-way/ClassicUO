@@ -265,3 +265,6 @@ __pycache__/
 *.pyc
 /.svn
 Data
+
+# for MacOS
+.DS_Store
