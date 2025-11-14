@@ -10,6 +10,7 @@ target=""
 
 # Determine the platform
 platform=$(uname -s)
+architecture=$(uname -m)
 
 # Build for the appropriate platform
 case $platform in
@@ -19,7 +20,18 @@ case $platform in
     ;;
   Darwin)
     # Add macOS-specific build commands here
-   target="osx-x64"
+    case $architecture in
+      arm64)
+        target="osx-arm64"
+        ;;
+      x86_64)
+        target="osx-x64"
+        ;;
+      *)
+        echo "Unsupported architecture on macOS: $architecture"
+        exit 1
+        ;;
+    esac
     ;;
   MINGW* | CYGWIN*)
     # Add Windows-specific build commands here
